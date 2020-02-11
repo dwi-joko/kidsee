@@ -5,6 +5,7 @@ var gulpConcat = require('gulp-concat');
 var gulpUglify = require('gulp-uglify');
 var gulpHtmlmin = require('gulp-htmlmin');
 var imagemin = require('gulp-imagemin');
+var deploy      = require('gulp-gh-pages');
 
 gulp.task('sayHello', async function () {
     console.log("Hello, selamat datang di Gulp!");
@@ -54,6 +55,11 @@ gulp.task('imagemin', async function () {
         svgoPlugins: [{removeViewBox: false}]
       }))
       .pipe(gulp.dest('dist/img'));
+  });
+
+  gulp.task('deploy', function () {
+    return gulp.src("./dist/**/*")
+      .pipe(deploy())
   });
 
 gulp.task('watch', async function () {
